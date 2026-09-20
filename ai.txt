@@ -1,0 +1,498 @@
+# Import required library
+from sklearn.ensemble import IsolationForest
+
+# Sample operational data
+data = [
+    [20, 30],
+    [25, 35],
+    [22, 32],
+    [95, 98]
+]
+
+# Create anomaly detection model
+model = IsolationForest(
+    contamination=0.1,
+    random_state=42
+)
+
+# Train the model
+model.fit(data)
+
+# Detect anomalies
+result = model.predict(data)
+
+# Display result
+for i in range(len(data)):
+    if result[i] == -1:
+        print(data[i], "Anomaly")
+    else:
+        print(data[i], "Normal")
+
+
+
+
+//
+
+ractical 1: Kafka — Real-Time Data Ingestion
+QUESTION
+
+Implement a real-time data ingestion pipeline using Kafka.
+
+QUESTION
+   ↓
+STEP 1: Repository / Environment
+   ↓
+STEP 2: Data / Input
+   ↓
+STEP 3: Producer Code
+   ↓
+STEP 4: Run Producer
+   ↓
+STEP 5: Consumer Code
+   ↓
+STEP 6: Run Consumer
+   ↓
+STEP 7: Output
+STEP 1 — Environment
+Kafka Server
+   ↓
+Kafka Topic
+   ↓
+Python Producer + Consumer
+
+Install Python Kafka library:
+
+pip install kafka-python
+STEP 2 — Data / Input
+
+Example operational data:
+
+data = "Server1 CPU=95"
+STEP 3 — Producer Code
+from kafka import KafkaProducer
+
+# Create Kafka producer
+producer = KafkaProducer(
+    bootstrap_servers="localhost:9092"
+)
+
+# Send data to Kafka topic
+producer.send(
+    "system_logs",
+    b"Server1 CPU=95"
+)
+
+# Make sure message is sent
+producer.flush()
+
+print("Data sent successfully")
+STEP 4 — Run
+
+Producer run karne par:
+
+Data sent successfully
+STEP 5 — Consumer Code
+from kafka import KafkaConsumer
+
+# Connect to Kafka topic
+consumer = KafkaConsumer(
+    "system_logs",
+    bootstrap_servers="localhost:9092",
+    auto_offset_reset="earliest"
+)
+
+# Read incoming messages
+for message in consumer:
+    print("Received:", message.value.decode())
+STEP 6 — Run Consumer
+
+Expected:
+
+Received: Server1 CPU=95
+STEP 7 — Final Workflow
+Producer
+   ↓
+Kafka Broker
+   ↓
+system_logs Topic
+   ↓
+Consumer
+   ↓
+Processed Data
+Practical 2: Airflow — Automated Data Pipeline
+QUESTION
+
+Create an automated data pipeline using Apache Airflow.
+
+QUESTION
+   ↓
+STEP 1: Environment
+   ↓
+STEP 2: Input Data
+   ↓
+STEP 3: Create DAG
+   ↓
+STEP 4: Define Tasks
+   ↓
+STEP 5: Define Task Order
+   ↓
+STEP 6: Run DAG
+   ↓
+STEP 7: Check Output
+STEP 1 — Environment
+
+Install:
+
+pip install apache-airflow
+STEP 2 — Input
+
+Suppose operational data ko process karna hai.
+
+Raw Data
+   ↓
+Cleaning
+   ↓
+Transformation
+   ↓
+Model Training
+STEP 3 + 4 — DAG and Tasks
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from datetime import datetime
+
+
+# Task 1: Extract data
+def extract():
+    print("Extracting operational data")
+
+
+# Task 2: Transform data
+def transform():
+    print("Cleaning and transforming data")
+
+
+# Task 3: Train model
+def train():
+    print("Training ML model")
+
+
+# Create Airflow DAG
+with DAG(
+    dag_id="aiops_pipeline",
+    start_date=datetime(2026, 1, 1),
+    schedule=None,
+    catchup=False
+) as dag:
+
+    extract_task = PythonOperator(
+        task_id="extract_data",
+        python_callable=extract
+    )
+
+    transform_task = PythonOperator(
+        task_id="transform_data",
+        python_callable=transform
+    )
+
+    train_task = PythonOperator(
+        task_id="train_model",
+        python_callable=train
+    )
+
+    # Define execution order
+    extract_task >> transform_task >> train_task
+STEP 5 — Pipeline Order
+extract_data
+      ↓
+transform_data
+      ↓
+train_model
+STEP 6 — Run
+
+Airflow UI me DAG ko trigger/run karte hain.
+
+STEP 7 — Output
+Extracting operational data
+Cleaning and transforming data
+Training ML model
+Practical 3: Spark — Data Processing
+QUESTION
+
+Process operational data using Apache Spark.
+
+QUESTION
+   ↓
+STEP 1: Spark Environment
+   ↓
+STEP 2: Create/Load Data
+   ↓
+STEP 3: Create DataFrame
+   ↓
+STEP 4: Transform Data
+   ↓
+STEP 5: Display Result
+Code
+from pyspark.sql import SparkSession
+
+# Create Spark session
+spark = SparkSession.builder \
+    .appName("AIOps") \
+    .getOrCreate()
+
+# Sample server data
+data = [
+    ("Server1", 80),
+    ("Server2", 95),
+    ("Server3", 60)
+]
+
+# Create DataFrame
+df = spark.createDataFrame(
+    data,
+    ["server", "cpu"]
+)
+
+# Display data
+df.show()
+
+# Select servers having CPU > 80
+result = df.filter(df.cpu > 80)
+
+# Display filtered result
+result.show()
+
+# Stop Spark
+spark.stop()
+Output concept
+Server2 | 95
+
+Workflow:
+
+Data
+ ↓
+Spark DataFrame
+ ↓
+Transformation
+ ↓
+Filtered/Processed Data
+Practical 4: Feature Store — Feast
+QUESTION
+
+Implement a feature store using Feast.
+
+QUESTION
+   ↓
+STEP 1: Prepare Data
+   ↓
+STEP 2: Define Features
+   ↓
+STEP 3: Create Feature Store
+   ↓
+STEP 4: Apply Configuration
+   ↓
+STEP 5: Materialize Features
+   ↓
+STEP 6: Retrieve Features
+   ↓
+STEP 7: Use for ML Model
+
+Concept:
+
+Raw Data
+   ↓
+Feature Engineering
+   ↓
+Feature Store
+   ↓
+Training / Serving
+   ↓
+ML Model
+
+Example feature data:
+
+server_id | cpu_usage | memory_usage
+
+Features:
+
+cpu_usage
+memory_usage
+
+Exam me important explanation: Feature store ML features ko centrally manage/store karta hai so that training aur inference me consistent features use ho sakein.
+
+Practical 5: MLflow — Model/Data Tracking
+QUESTION
+
+Track ML experiments using MLflow.
+
+QUESTION
+   ↓
+STEP 1: Prepare Data
+   ↓
+STEP 2: Train Model
+   ↓
+STEP 3: Log Parameters
+   ↓
+STEP 4: Log Metrics
+   ↓
+STEP 5: Log Model
+   ↓
+STEP 6: View Experiment
+Code
+import mlflow
+import mlflow.sklearn
+
+from sklearn.linear_model import LinearRegression
+
+# Start MLflow experiment
+with mlflow.start_run():
+
+    # Training data
+    X = [[1], [2], [3], [4]]
+    y = [2, 4, 6, 8]
+
+    # Create and train model
+    model = LinearRegression()
+    model.fit(X, y)
+
+    # Calculate model score
+    score = model.score(X, y)
+
+    # Log metric
+    mlflow.log_metric("score", score)
+
+    # Save model information
+    mlflow.sklearn.log_model(
+        model,
+        "linear_model"
+    )
+
+    print("Model tracked successfully")
+
+Workflow:
+
+Training
+   ↓
+MLflow Run
+   ↓
+Parameters
+   ↓
+Metrics
+   ↓
+Model
+   ↓
+Experiment Tracking
+Practical 6: GitHub Actions + ML Pipeline
+
+Tumhare exam ke GitHub/Codespaces wale pattern se:
+
+QUESTION
+   ↓
+STEP 1: Repository / Codespace
+   ↓
+STEP 2: Setup Python Environment
+   ↓
+STEP 3: Install Dependencies
+   ↓
+STEP 4: Run Pipeline/Test
+   ↓
+STEP 5: Create GitHub Workflow
+   ↓
+STEP 6: Commit + Push
+   ↓
+STEP 7: GitHub Actions
+   ↓
+PASS / FAIL
+
+Example workflow:
+
+name: ML Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Get repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Install Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      # Install project dependencies
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # Run tests
+      - name: Run tests
+        run: |
+          pytest --verbose
+⭐ Unit 2 ka MASTER FLOW
+
+Isko exam se pehle sabse zyada yaad karo:
+
+                 DATA SOURCE
+                     ↓
+              DATA INGESTION
+                     ↓
+          ┌──────────┴──────────┐
+          ↓                     ↓
+       Kafka                 Batch Data
+    (Real-time)                 ↓
+          ↓                   Airflow
+          ↓                     ↓
+          └──────────┬──────────┘
+                     ↓
+                   Spark
+                     ↓
+              Data Processing
+                     ↓
+              Feature Engineering
+                     ↓
+               Feature Store
+                     ↓
+              Model Training
+                     ↓
+              MLflow / DVC
+                     ↓
+             Model Versioning
+                     ↓
+              GitHub Actions
+                     ↓
+                Deployment
+Tools ko ek line me yaad karo
+Tool	Exam me role
+Kafka	Real-time data streaming
+Airflow	Workflow orchestration
+Spark	Large-scale data processing
+Feast	Feature store
+Hopsworks	Feature/data platform
+MLflow	Experiment/model tracking
+DVC	Dataset/model versioning
+TFX	ML pipeline
+Kubeflow	ML workflow/pipeline
+Unit 1 vs Unit 2
+UNIT 1
+Logs → Analyze → Detect Anomaly → Automate
+                 ↓
+              AIOps
+
+UNIT 2
+Data → Kafka/Airflow → Spark → Features → Model
+                                      ↓
+                              Track/Version
+                                      ↓
+                                  Deploy
+
+Exam me agar “workflow/steps” pooche → flowchart likho.
+Agar “implement” pooche → flowchart + code + output likho.
+Agar “GitHub/Azure practical” ho → repository → environment → code → test → commit → push → Actions → deployment wala pattern use karo.
