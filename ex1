@@ -1,0 +1,98 @@
+GitHub Account
+      ↓
+Given Repository
+      ↓
+GitHub Codespaces
+      ↓
+Open Project
+      ↓
+Understand README / Files
+      ↓
+Make Required Change
+      ↓
+Run / Test
+      ↓
+Git Commit
+      ↓
+Git Push
+      ↓
+GitHub Actions
+      ↓
+Check Workflow Result
+Exam me tumhe mainly ye aana chahiye
+
+1. GitHub
+
+Repository open karna
+Personal GitHub account use karna
+Given repo/forked repo identify karna
+
+2. Codespaces
+
+Codespace create/open
+VS Code environment samajhna
+Terminal open karna
+
+3. Project setup
+
+Python version
+      ↓
+Virtual Environment
+      ↓
+Dependencies
+      ↓
+Project run
+
+Example:
+
+python -m venv .venv
+source .venv/bin/activate
+
+Windows:
+
+.venv\Scripts\activate
+pip install -r requirements.txt
+
+4. Code/Test
+Teacher jo modification de, woh karna.
+
+Python project ho to:
+
+pytest
+
+ya repository ke README me jo test command di ho.
+
+5. Git — VERY IMPORTANT
+
+git status
+git add .
+git commit -m "Update project"
+git push
+
+Yaad rakho:
+
+status → add → commit → push
+
+6. GitHub Actions
+
+Push
+ ↓
+GitHub Actions trigger
+ ↓
+Workflow YAML
+ ↓
+Install dependencies
+ ↓
+Run tests
+ ↓
+PASS / FAIL
+
+Tumhare practice me exactly isi type ka workflow tha:
+
+- name: Install dependencies
+  run: |
+    pip install -r requirements.txt
+
+- name: Run tests
+  run: |
+    pytest --verbose
