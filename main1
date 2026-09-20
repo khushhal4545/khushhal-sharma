@@ -1,0 +1,47 @@
+Bhai agar sirf commands yaad karni hain, ye wali list rat le:
+
+git clone <repo-url>
+cd <repo-name>
+code .
+Python setup
+
+python --version
+
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+
+Dependencies
+pip install -r requirements.txt
+
+Run
+python app.py
+Test
+pytest
+
+Git
+git status
+git add .
+git commit -m "message"
+git push
+
+Push problem
+git pull --rebase origin main
+git push
+
+Useful checking
+git log --oneline
+git branch
+git remote -v
+
+
+git clone <repo-url>
+cd <repo-name>
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python app.py
+pytest
+git status
+git add .
+git commit -m "message"
+git push
