@@ -1,0 +1,264 @@
+1. Repository lene ke baad
+Agar Local VS Code use karna ho
+git clone <REPOSITORY_URL>
+cd <REPOSITORY_NAME>
+code .
+
+Example:
+
+git clone https://github.com/username/project.git
+cd project
+code .
+
+code . VS Code mein current folder open karta hai.
+
+2. Python version check
+python --version
+
+Windows mein ye bhi useful:
+
+py --version
+
+Available Python versions:
+
+py -0p
+3. Virtual Environment banana ⭐
+
+Exam mein Python project ho to ye yaad rakho:
+
+Windows
+python -m venv .venv
+
+ya:
+
+py -3.13 -m venv .venv
+Activate
+
+PowerShell:
+
+.venv\Scripts\Activate.ps1
+
+CMD:
+
+.venv\Scripts\activate
+
+Successful hone par:
+
+(.venv) PS C:\...
+
+dikhega.
+
+Deactivate
+deactivate
+4. Dependencies install karna ⭐⭐⭐
+
+Sabse pehle project mein check:
+
+requirements.txt
+
+hai ya nahi.
+
+Agar hai:
+
+pip install -r requirements.txt
+
+Ye bahut important command hai.
+
+Installed packages check:
+pip list
+Pip update:
+python -m pip install --upgrade pip
+
+Lekin exam mein unnecessarily pip update mat karna. README mein jo diya ho, wahi follow karo.
+
+5. Agar requirements.txt nahi hai
+
+Agar README mein specific packages diye hain:
+
+pip install pytest
+
+Example:
+
+pip install flask
+pip install pandas
+pip install numpy
+
+Multiple:
+
+pip install pytest coverage pytest-cov
+6. Project ko run karna ⭐⭐⭐
+
+Ye project-dependent hai. README dekho.
+
+Common commands:
+
+Python file
+python app.py
+
+or
+
+python main.py
+Module
+python -m <module>
+Streamlit
+streamlit run app.py
+FastAPI/Uvicorn
+uvicorn main:app --reload
+
+Exam mein random command nahi lagani. README/project files mein jo entry point ho, uske according run karna.
+
+7. Testing ⭐⭐⭐
+
+Agar project mein pytest hai:
+
+pytest
+
+Detailed:
+
+pytest --verbose
+
+Coverage:
+
+pytest --cov=src --verbose
+
+Coverage report:
+
+coverage report
+
+Hamare GitHub Skills practice mein exactly:
+
+pytest --cov=src --verbose
+
+use hua tha.
+
+8. Git status ⭐⭐⭐
+
+Change karne ke baad sabse pehle:
+
+git status
+
+Ye batayega kaunsi files modified/untracked hain.
+
+Example:
+
+modified: app.py
+9. Git add ⭐⭐⭐
+
+Specific file:
+
+git add app.py
+
+All changes:
+
+git add .
+
+Exam ke liye:
+
+git add .
+
+yaad rakh sakta hai.
+
+10. Git commit ⭐⭐⭐⭐⭐
+git commit -m "Implement required changes"
+
+Examples:
+
+git commit -m "Fix login functionality"
+git commit -m "Add unit tests"
+
+Commit message meaningful hona chahiye.
+
+11. Git push ⭐⭐⭐⭐⭐
+
+Normally:
+
+git push
+
+Agar first push/current branch specify karni ho:
+
+git push origin main
+12. Agar git push reject ho jaye ⭐⭐⭐
+
+Kabhi remote repository mein changes already hote hain.
+
+Error kuch aisa:
+
+rejected
+non-fast-forward
+
+Tab:
+
+git pull --rebase origin main
+
+phir:
+
+git push
+
+Hamare practice mein exactly ye situation aayi thi.
+
+So remember:
+
+git push
+   ↓
+rejected?
+   ↓
+git pull --rebase origin main
+   ↓
+git push
+13. Git history check
+git log --oneline
+
+Isse commits dikhenge.
+
+Latest commit:
+
+git log -1
+14. Git branch check
+git branch
+
+Current branch:
+
+git branch --show-current
+
+Usually exam repo mein:
+
+main
+15. Remote repository check
+git remote -v
+
+Output mein GitHub repository ka URL dikhega.
+
+16. GitHub Actions
+
+Iske liye generally terminal command nahi hoti.
+
+GitHub website:
+
+Repository
+   ↓
+Actions
+   ↓
+Workflow
+   ↓
+Latest Run
+   ↓
+Success ✅ / Failure ❌
+
+Agar workflow push event par configured hai:
+
+git commit
+    ↓
+git push
+    ↓
+GitHub Actions automatically
+    ↓
+Tests
+    ↓
+Result
+17. GitHub Actions workflow manually run karna
+
+Agar workflow mein:
+
+workflow_dispatch:
+
+configured hai, tab GitHub Actions page par Run workflow button aa sakta hai.
